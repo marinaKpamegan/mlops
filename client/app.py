@@ -5,6 +5,14 @@ import base64
 API_BASE_URL = "http://server:8000"
 
 st.title("Iris Dataset Prediction")
+
+model = st.selectbox(
+    "Choose the model",
+    ("KNN", "Random Forest", "Decision Tree"),
+    index=0
+)
+
+
 sepal_length=st.number_input(
         "Enter a sepal length",
         4.8,
@@ -31,7 +39,7 @@ petal_width=st.number_input(
     )
 
 button_clicked = st.button("Predict")
-
+tab1, tab2, tab3 = st.tabs(["Prediction", "Metrics", "Graph"])
 
 if button_clicked:
     item = {
@@ -50,13 +58,19 @@ if button_clicked:
         prediction = result.get("prediction")
         image_base64 = result.get("image")
 
-        st.success(f"Prediction: {prediction}")
+        with tab1:
+            st.success(f"Prediction: {prediction}")
+            # Decode and display the image
+            if image_base64:
+                image_data = base64.b64decode(image_base64)
+                st.image(image_data, caption=f"Image of {prediction}", use_column_width=True)
+            else:
+                st.error("No image returned from the API.")
+        with tab2:
+            st.write("Metrics")
 
-        # Decode and display the image
-        if image_base64:
-            image_data = base64.b64decode(image_base64)
-            st.image(image_data, caption=f"Image of {prediction}", use_column_width=True)
-        else:
-            st.error("No image returned from the API.")
+        with tab3:
+            st.write("Graphs")
+            
     except requests.exceptions.RequestException as e:
         st.error(f"An error occurred: {e}")
