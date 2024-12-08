@@ -52,15 +52,16 @@ iris_data = pd.DataFrame(iris.data, columns=iris.feature_names)
 
 
 @app.post("/predict/{model_name}")
-def predict(item: Item, model_name="KNN", model_version=1):
+def predict(item: Item, model_name="KNN", model_version=None):
     chosen_model = model_files[model_name]
     item_data = jsonable_encoder(item)
-
+    print("#############")
+    print(chosen_model)
     # load model from mlflow
     model = get_model_from_mlflow(chosen_model, model_version)
     # with open(model_path, "rb") as f:
     #     model_file = pickle.load(f)
-        
+       
     features = [list(item_data.values())]
     pred = model.predict(features)[0]
     specy = species[pred]
@@ -72,17 +73,24 @@ def predict(item: Item, model_name="KNN", model_version=1):
     return {"image": image_base64, "prediction": specy}
 
 
-def get_model_from_mlflow(model_name:str, model_version:int):
+def get_model_from_mlflow(model_name:str, model_version:int = None):
+    if model_version:
+        model_uri = f"models:/{model_name}/{model_version}"
+    else:
+        model_uri = f"models:/{model_name}/latest"
+
+    print("#############")
+    print(model_uri)
     model = mlflow.pyfunc.load_model(
-        model_uri=f"models:/{model_name}/{model_version}"
+        model_uri=model_uri
     )
     return model
 
 @app.post("/train/{model_name}")
 def train(model_name: str):
     try:
-        run_model(iris.data, iris.target, iris.target_names, model_type=model_name)
-        return {"success": True, "message": f"Model {model_name} trained successfully"}
+        runned_model = run_model(iris.data, iris.target, iris.target_names, model_type=model_name)
+        return {"success": True, "message": f"Model {model_name} trained successfully", "model_link":f"http://localhost:5000/#/models/{runned_model}"}
     except Exception as e:
         # Renvoie une erreur HTTP avec un code 400 (bad request)
         raise HTTPException(status_code=400, detail=str(e))
@@ -92,13 +100,13 @@ def train(model_name: str):
 def update_model(model_name: str, model_version: int = None):
     global current_model
     try:
-        if model_version:
+        """ if model_version:
             model_uri = f"models:/{model_name}/{model_version}"
         else:
-            model_uri = f"models:/{model_name}/latest"
+            model_uri = f"models:/{model_name}/latest" """
 
         # Load the model from MLFlow
-        current_model = mlflow.sklearn.load_model(model_uri)
+        current_model = get_model_from_mlflow(model_name=model_name)
         return {"success": True, "message": f"Model '{model_name}' (version {model_version or 'latest'}) loaded successfully."}
     except Exception as e:
         return {"success": False, "error": str(e)}

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Evidya/Documents/cours%20M2/MLops/mlops-projet/mlops/client/mlruns/0/e8e52a1ef14c4c18a444e6f2277da68c/artifacts
+end_time: 1733666429832
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e8e52a1ef14c4c18a444e6f2277da68c
+run_name: likeable-squid-678
+run_uuid: e8e52a1ef14c4c18a444e6f2277da68c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1733666429653
+status: 4
+tags: []
+user_id: Evidya

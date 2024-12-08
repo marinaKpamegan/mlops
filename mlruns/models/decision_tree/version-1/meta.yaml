@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1733667728992
+current_stage: None
+description: null
+last_updated_timestamp: 1733667728992
+name: decision_tree
+run_id: e1ade92ceaad45ebafeb80e3c6244651
+run_link: null
+source: file:///C:/Users/Evidya/Documents/cours%20M2/MLops/mlops-projet/mlops/mlruns/0/e1ade92ceaad45ebafeb80e3c6244651/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/Evidya/Documents/cours%20M2/MLops/mlops-projet/mlops/mlruns/0/e1ade92ceaad45ebafeb80e3c6244651/artifacts/model
+user_id: null
+version: 1

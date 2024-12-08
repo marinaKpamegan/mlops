@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Evidya/Documents/cours%20M2/MLops/mlops-projet/mlops/mlruns/0/cc9056e15d4f43c0b25a246286c34d6c/artifacts
+end_time: 1733667724910
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cc9056e15d4f43c0b25a246286c34d6c
+run_name: receptive-croc-253
+run_uuid: cc9056e15d4f43c0b25a246286c34d6c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1733667718817
+status: 3
+tags: []
+user_id: Evidya

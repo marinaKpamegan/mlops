@@ -64,16 +64,24 @@ def train_and_evaluate_model(model, model_name, X_train, X_test, y_train, y_test
 def run_model(X, y, target_names, model_type="KNN"):
     X_train, X_test, y_train, y_test = load_data(X, y, test_size=0.4)
     # Exemple d'utilisation avec KNN
+    model = None 
+    model_name = ""
     if model_type=="KNN":
-        knn = KNeighborsClassifier(n_neighbors=3)
-        train_and_evaluate_model(knn, "knn", X_train, X_test, y_train, y_test, target_names)
+        model = KNeighborsClassifier(n_neighbors=3)
+        model_name = "knn"
 
     # Exemple d'utilisation avec Decision Tree
     if model_type=="Decision Tree Classifier":
-        decision_tree = DecisionTreeClassifier(random_state=42)
-        train_and_evaluate_model(decision_tree, "decision_tree", X_train, X_test, y_train, y_test, target_names)
-
+        model = DecisionTreeClassifier(random_state=42)
+        model_name = "decision_tree"
+        
     # Exemple d'utilisation avec Random Forest
     if model_type=="Random Forest Classifier":
-        random_forest = RandomForestClassifier(n_estimators=100, random_state=42)
-        train_and_evaluate_model(random_forest, "random_forest", X_train, X_test, y_train, y_test, target_names)
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        model_name = "random_forest"
+
+    # training chosen model
+    train_and_evaluate_model(model, model_name, X_train, X_test, y_train, y_test, target_names)
+    return model_name
+
+
