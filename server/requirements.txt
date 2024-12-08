@@ -5,5 +5,5 @@ pymongo
 pydantic
 scikit-learn
 pandas
-pillow
+mlflow
 

@@ -1,76 +1,55 @@
 import streamlit as st
-import requests
-import base64
 
-API_BASE_URL = "http://server:8000"
+# Configuration de la page
+st.set_page_config(page_title="Machine Learning MLOps Platform", page_icon="🚀", layout="wide")
 
-st.title("Iris Dataset Prediction")
+# Titre principal
+st.title("Bienvenue sur votre plateforme de Machine Learning MLOps 🚀")
 
-model = st.selectbox(
-    "Choose the model",
-    ("KNN", "Random Forest", "Decision Tree"),
-    index=0
-)
+# Sous-titre
+st.subheader("Simplifiez, automatisez et suivez vos modèles de Machine Learning avec cette application intuitive.")
 
+# Contenu principal
+st.markdown("""
+### 🌟 **Fonctionnalités principales :**
 
-sepal_length=st.number_input(
-        "Enter a sepal length",
-        4.8,
-        key="sepal_length",
-    )
+1. **Entraînement de modèles personnalisés :**
+   - Choisissez parmi plusieurs algorithmes (KNN, Random Forest, Decision Tree, etc.).
+   - Configurez les paramètres d’entraînement directement depuis l’interface.
 
-sepal_width=st.number_input(
-        "Enter a sepal width",
-        3.2,
-        key="sepal_width",
-    )
+3. **Suivi et gestion des performances :**
+   - Visualisez les métriques d’évaluation (accuracy, RMSE, R²) après chaque entraînement.
+   - Enregistrez et gérez vos modèles avec MLflow intégré.
 
+4. **Déploiement et prédictions :**
+   - Déployez vos modèles et testez leurs prédictions sur des données réelles.
 
-petal_length=st.number_input(
-        "Enter a petal length",
-        1.9,
-        key="petal_length",
-    )
+---
 
-petal_width=st.number_input(
-        "Enter a petal width",
-        0.2,
-        key="petal_width",
-    )
+### 🤔 **Comment utiliser l'application ?**
 
-button_clicked = st.button("Predict")
-tab1, tab2, tab3 = st.tabs(["Prediction", "Metrics", "Graph"])
+1. **Naviguez dans les différentes sections :**
+   - **Exploration des données** : Analysez et préparez vos données.
+   - **Entraînement des modèles** : Sélectionnez un algorithme, configurez les paramètres, et lancez l'entraînement.
+   - **Suivi des modèles** : Consultez vos résultats et téléchargez vos modèles enregistrés.
 
-if button_clicked:
-    item = {
-        "sepal_length": sepal_length,
-        "sepal_width": sepal_width,
-        "petal_length": petal_length,
-        "petal_width": petal_width
-    }
-    
-    try:
-        response = requests.post(f"{API_BASE_URL}/predict/", json=item)
-        response.raise_for_status()
-        result = response.json()
+2. **Suivi des modèles ML avec MLflow :**
+   - Visualisez l’historique des expériences et les artefacts associés.
 
-        # Extract prediction and Base64 image
-        prediction = result.get("prediction")
-        image_base64 = result.get("image")
+3. **Tester les prédictions :**
+   - Chargez un jeu de données ou saisissez des exemples pour tester vos modèles déployés.
 
-        with tab1:
-            st.success(f"Prediction: {prediction}")
-            # Decode and display the image
-            if image_base64:
-                image_data = base64.b64decode(image_base64)
-                st.image(image_data, caption=f"Image of {prediction}", use_column_width=True)
-            else:
-                st.error("No image returned from the API.")
-        with tab2:
-            st.write("Metrics")
+---
 
-        with tab3:
-            st.write("Graphs")
-            
-    except requests.exceptions.RequestException as e:
-        st.error(f"An error occurred: {e}")
+### 👨‍💻 **À propos :**
+
+Cette application s'inscrit dans une démarche MLOps, en intégrant des pratiques modernes pour industrialiser et automatiser les workflows de machine learning. Elle est construite avec :
+- **Streamlit** : Interface utilisateur conviviale.
+- **Docker** : Conteneurisation et scalabilité.
+- **MLflow** : Suivi et gestion des modèles.
+
+Explorez, expérimentez et optimisez vos modèles dès aujourd'hui ! 🌍
+""")
+
+# Pied de page
+st.info("💡 Besoin d'aide ? Contactez l'administrateur ou consultez la documentation.")

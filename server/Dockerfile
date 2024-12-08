@@ -6,8 +6,8 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 COPY app.py app.py
-COPY model.pkl model.pkl
-COPY models.py models.py
+COPY models models
 COPY images images
+COPY train.py train.py
 
 CMD  ["uvicorn", "--host", "0.0.0.0", "app:app"]
