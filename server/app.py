@@ -63,7 +63,11 @@ def predict(item: Item, model_name="KNN", model_version=None):
     #     model_file = pickle.load(f)
        
     features = [list(item_data.values())]
-    pred = model.predict(features)[0]
+    input_array = np.array(features).reshape(1, -1)
+    print("#############")
+    print(input_array)
+    
+    pred = model.predict(input_array)[0]
     specy = species[pred]
     image_path = os.path.join("images", f"{specy}.jpg")
 
@@ -86,11 +90,11 @@ def get_model_from_mlflow(model_name:str, model_version:int = None):
     )
     return model
 
-@app.post("/train/{model_name}")
-def train(model_name: str):
+@app.post("/train/{model_name}/{test_size}")
+def train(model_name: str, test_size: float = 0.4):
     try:
-        runned_model = run_model(iris.data, iris.target, iris.target_names, model_type=model_name)
-        return {"success": True, "message": f"Model {model_name} trained successfully", "model_link":f"http://localhost:5000/#/models/{runned_model}"}
+        runned_model, matrix = run_model(iris.data, iris.target, iris.target_names, model_type=model_name, test_size=test_size)
+        return {"success": True, "message": f"Model {model_name} trained successfully", "model_link":f"http://localhost:5000/#/models/{runned_model}", "matrix_base64": matrix}
     except Exception as e:
         # Renvoie une erreur HTTP avec un code 400 (bad request)
         raise HTTPException(status_code=400, detail=str(e))
@@ -110,4 +114,3 @@ def update_model(model_name: str, model_version: int = None):
         return {"success": True, "message": f"Model '{model_name}' (version {model_version or 'latest'}) loaded successfully."}
     except Exception as e:
         return {"success": False, "error": str(e)}
-

@@ -30,6 +30,7 @@ services:
         environment:
             - MLFLOW_TRACKING_URI=http://mlflow:5000  # Utilise mlflow-server comme hôte
         depends_on:
+            - mongo
             - mlflow
         networks:
             - app-network
@@ -41,6 +42,8 @@ services:
             dockerfile: Dockerfile
         ports:
             - 8501:8501
+        depends_on:
+            - mongo
         networks:
             - app-network
 

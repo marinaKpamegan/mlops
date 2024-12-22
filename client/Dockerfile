@@ -1,4 +1,6 @@
 FROM python:3.9-slim
+# Installer Git
+RUN apt-get update && apt-get install -y git
 
 COPY requirements.txt /app/requirements.txt
 

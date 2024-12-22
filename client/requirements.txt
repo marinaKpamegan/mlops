@@ -2,3 +2,6 @@ streamlit
 requests
 plotly
 matplotlib
+mlflow
+scikit-learn
+seaborn

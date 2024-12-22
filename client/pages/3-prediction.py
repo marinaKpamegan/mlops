@@ -25,7 +25,6 @@ petal_width=st.slider("Enter a petal width", min_value=0.0, max_value=13.0, valu
 
 
 button_clicked = st.button("Predict")
-tab1, tab2, tab3 = st.tabs(["Prediction", "Metrics", "Graph"])
 
 if button_clicked:
     item = {
@@ -44,19 +43,14 @@ if button_clicked:
         prediction = result.get("prediction")
         image_base64 = result.get("image")
 
-        with tab1:
-            st.success(f"Prediction: {prediction}")
-            # Decode and display the image
-            if image_base64:
-                image_data = base64.b64decode(image_base64)
-                st.image(image_data, caption=f"Image of {prediction}", use_container_width=True)
-            else:
-                st.error("No image returned from the API.")
-        with tab2:
-            st.write("Metrics")
-
-        with tab3:
-            st.write("Graphs")
-            
+        st.subheader("Prediction")
+        st.success(f"Prediction: {prediction}")
+        # Decode and display the image
+        if image_base64:
+            image_data = base64.b64decode(image_base64)
+            st.image(image_data, caption=f"Image of {prediction}", use_container_width=True)
+        else:
+            st.error("No image returned from the API.")
+        
     except requests.exceptions.RequestException as e:
         st.error(f"An error occurred: {e}")
