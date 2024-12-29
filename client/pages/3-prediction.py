@@ -33,24 +33,26 @@ if button_clicked:
         "petal_length": petal_length,
         "petal_width": petal_width
     }
+    with st.spinner('Processing...'):
     
-    try:
-        response = requests.post(f"{API_BASE_URL}/predict/{model}", json=item)
-        response.raise_for_status()
-        result = response.json()
+        try:
+            response = requests.post(f"{API_BASE_URL}/predict/{model}", json=item)
+            response.raise_for_status()
+            result = response.json()
 
-        # Extract prediction and Base64 image
-        prediction = result.get("prediction")
-        image_base64 = result.get("image")
+            # Extract prediction and Base64 image
+            prediction = result.get("prediction")
+            image_base64 = result.get("image")
 
-        st.subheader("Prediction")
-        st.success(f"Prediction: {prediction}")
-        # Decode and display the image
-        if image_base64:
-            image_data = base64.b64decode(image_base64)
-            st.image(image_data, caption=f"Image of {prediction}", use_container_width=True)
-        else:
-            st.error("No image returned from the API.")
-        
-    except requests.exceptions.RequestException as e:
-        st.error(f"An error occurred: {e}")
+            st.subheader("Prediction")
+            st.success(f"Prediction: {prediction}")
+            # st.info("Predicted")
+            # Decode and display the image
+            if image_base64:
+                image_data = base64.b64decode(image_base64)
+                st.image(image_data, caption=f"Image of {prediction}", use_container_width=True)
+            else:
+                st.error("No image returned from the API.")
+            
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred: {e}")

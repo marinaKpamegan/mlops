@@ -105,7 +105,7 @@ def train_and_evaluate_model(model, model_name, X_train, X_test, y_train, y_test
 
             return cm_base64
     except Exception as e:
-        print(f"An error occurred: ########### {e}")
+        print(f"An error occurred: {e}")
         return None
         
 
