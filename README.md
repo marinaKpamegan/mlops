@@ -33,7 +33,7 @@ The project uses the **Iris dataset**, which includes:
 - **Frontend (Streamlit)**:
   - User-friendly interface to train models, test predictions, and update models.
 - **MLFlow**:
-  - Tracks experiments, stores metrics, and manages model versions.
+  - Tracks experiments, stores metrics, and manages model versions in sqlite db.
 - **Docker Compose**:
   - Containerized services for seamless deployment.
 
@@ -52,4 +52,8 @@ The project uses the **Iris dataset**, which includes:
    ```bash
    git clone <repository-url>
    cd <repository-folder>
+
+### **Some images**
+
+![alt text](<Capture d'écran 2024-12-29 191202.png>) ![alt text](<Capture d'écran 2024-12-29 183017.png>) ![alt text](<Capture d'écran 2024-12-29 183113.png>) ![alt text](<Capture d'écran 2024-12-29 191132.png>)
 
