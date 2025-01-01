@@ -52,6 +52,7 @@ The project uses the **Iris dataset**, which includes:
    ```bash
    git clone <repository-url>
    cd <repository-folder>
+   docker-compose up --build
 
 ### **Some images**
 
