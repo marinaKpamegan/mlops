@@ -52,6 +52,11 @@ The project uses the **Iris dataset**, which includes:
    ```bash
    git clone <repository-url>
    cd <repository-folder>
+2. Build and run the project
+   ```bash
+   docker-compose up --build
+
+Make sure that your port 8000, 8501 and 5000 are not in use.
 
 ### **Some images**
 
