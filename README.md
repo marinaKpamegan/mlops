@@ -43,7 +43,7 @@ The project uses the **Iris dataset**, which includes:
 
 ### **Prerequisites**
 - Python 3.8+
-- Docker and Docker Compose installed.
+- Docker or Docker Desktop installed.
 
 ---
 
