@@ -19,9 +19,9 @@ collection = db.test_collection
 current_model = None
 
 
-@app.get("/")
-def root():
-    return {"message": "Hello World"}
+@app.get("/version")
+def version():
+    return {"version": "0.3.0"}
 
 
 """@app.get("/add/{fruit}")
@@ -41,8 +41,6 @@ class Item(BaseModel):
     petal_length: float
     petal_width: float
 
-
-app = FastAPI()
 species = ['setosa', 'versicolor', 'virginica']
 model_files = {"KNN":"knn", "Random Forest Classifier":"random_forest", "Decision Tree Classifier":"decision_tree"}
 
